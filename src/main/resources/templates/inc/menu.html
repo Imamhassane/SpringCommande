@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+
+</head>
+<body>
+<header th:fragment="menu">
+    <a href="#" class="logo"><i class="fas fa-utensils"></i>Brasil Burger.</a>
+    <nav class="navbar">
+        <a class="active" href="#home">Accueil</a>
+        <a href="#menu">menu</a>
+        <a href="/produit/list">produit</a>
+        <a href="#about">A propos</a>
+    </nav>
+    <div class="icons flex">
+        <i class="fas fa-bars" id="menu-bars"></i>
+        <div class="dropdown">
+            <a class="fas fa-user "></a>
+            <ul class="dropdown-menu absolute hidden  pt-2">
+                <li class=""><a href="/connexion">Connexion</a></li>
+                <li class=""><a href="#">Créer un compte</a></li>
+            </ul>
+        </div>
+        <a href="#order" class="fas fa-map-marker-alt"></a>
+        <a href="#" class="fas fa-shopping-cart"></a>
+    </div>
+</header>
+
+</body>
+</html>

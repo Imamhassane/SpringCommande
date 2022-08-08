@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Connexion</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+</head>
+<body>
+    <div class="flex justify-center items-center h-screen">
+        <form  class="block p-5 bg-white shadow-md w" id="form">
+            <div class="text-centaer pb-4">
+                <h1 class="text-xl">Bienvenue, veuillez vous connecter!</h1>
+            </div>
+            <div class="p-2">
+                <label for="email" ><span class="text-gray-500">Login</span> <span class="text-rose-600">*</span></label>
+                <input type="text" id="email" name="email" class="block border border-slate-300 w-80 pl-3 h-9 rounded focus:outline-slate-300">
+                <small class="text-rose-600"></small>
+            </div>
+            <div class="p-2">
+                <label for="password" class="text-gray-500"><span class="text-gray-500">Password</span> <span class="text-rose-600">*</span></label>
+                <input type="text" id="password" name="password" class="block border border-slate-300 w-80 pl-3 h-9 rounded focus:outline-slate-300">
+                <small class="text-rose-600"></small>
+            </div>
+            <div class="p-2 pt-3 flex justify-center items-center">
+                <button class="bg-blue-700 text px-5 py-1 text-white rounded hover:bg-blue-800">Connexion</button>
+            </div>
+        </form>
+    </div>
+
+
+    <script type="text/javascript" th:src="@{/js/connexion.js}"></script>
+</body>
+</html>
