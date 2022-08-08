@@ -10,6 +10,7 @@ import java.util.List;
 @NoArgsConstructor
 @Getter
 @Setter
+
 public class Burger {
 
     @Id
@@ -29,4 +30,45 @@ public class Burger {
     @OneToMany
     @JoinColumn(name = "burger")
     private List<QuantityEntity> quantite = new ArrayList<>();
+
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public int getPrix() {
+        return prix;
+    }
+
+    public void setPrix(int prix) {
+        this.prix = prix;
+    }
+
+    public List<Image> getImages() {
+        return images;
+    }
+
+    public void setImages(List<Image> images) {
+        this.images = images;
+    }
+
+    public List<QuantityEntity> getQuantite() {
+        return quantite;
+    }
+
+    public void setQuantite(List<QuantityEntity> quantite) {
+        this.quantite = quantite;
+    }
+
+    public String getNom() {
+        return nom;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
 }

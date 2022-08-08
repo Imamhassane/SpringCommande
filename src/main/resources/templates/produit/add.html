@@ -131,20 +131,20 @@
 <div class="container">
     <div class="title">Registration</div>
     <div class="content">
-        <form action="#">
+        <form th:action="@{/produit/save}" method="POST" enctype="multipart/form-data">
             <div class="user-details">
                 <div class="input-box">
                     <span class="details">Nom</span>
-                    <input type="text" autofocus>
+                    <input type="text" name="nom" autofocus>
                 </div>
 
                 <div class="input-box">
                     <span class="details">Prix</span>
-                    <input type="number" >
+                    <input type="number" name="prix" >
                 </div>
                 <div class="input-box">
                     <span class="details">Image</span>
-                    <input type="file">
+                    <input type="file" name="image" multiple>
                 </div>
             </div>
             <div class="button">

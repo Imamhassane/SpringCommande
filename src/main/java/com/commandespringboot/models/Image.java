@@ -27,9 +27,25 @@ public class Image {
 
     @ManyToOne
     @JoinColumn(name = "burger" , referencedColumnName = "id")
-    private Menu burger ;
+    private Burger burger ;
 
     @ManyToOne
     @JoinColumn(name = "complement" , referencedColumnName = "id")
-    private Menu complement ;
+    private Complement complement ;
+
+    public String getNom() {
+        return nom;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    public Burger getBurger() {
+        return burger;
+    }
+
+    public void setBurger(Burger burger) {
+        this.burger = burger;
+    }
 }
