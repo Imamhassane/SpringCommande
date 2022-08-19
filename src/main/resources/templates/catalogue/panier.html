@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Panier</title>
+    <link rel="stylesheet" th:href="@{/css/main.css}" />
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" th:href="@{/css/add.css}">
+</head>
+<body>
+<div class="nav"><div th:replace="inc/menu :: menu" ></div></div>
+
+<h3 class="sub-heading" th:if="${#lists.isEmpty(produits)}" style="font-size: 3.5rem">Panier vide</h3>
+
+<div class="table-content w-full"th:if="${not #lists.isEmpty(produits)}">
+    <table class="w-3/4 table shadow-md  text-sm text-left text-gray-500 dark:text-gray-400">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <tr>
+                <th scope="col" class="py-8 px-6">Image</th>
+                <th scope="col" class="py-8 px-6">Nom</th>
+                <th scope="col" class="py-8 px-6">Prix</th>
+                <th scope="col" class="py-8 px-6">Quantité</th>
+                <!--<th scope="col" class="py-8 px-6 text-center">Composants</th>-->
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="burger : ${produits}" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+            <td class="py-7 px-6"><img th:src="@{${'/upload/'+burger.burger.image.id+'/'+burger.burger.image.nom}}" width="50" height="50" class="border-none"></td>
+            <td class="py-7 px-6" th:text="${burger.burger.produitAttributes.nom}"></td>
+            <td class="py-7 px-6" th:text="@{${burger.burger.produitAttributes.prix+' F'}}"></td>
+                <!--<td class="py-7 px-6 text-center">
+                    <th:block th:each="quantite : ${menu.quantite}">
+                        <th:block th:each="burger : ${quantite.burger}">
+                            <span class="mx-1" th:text="@{${burger.produitAttributes.nom}+' '+${burger.class.simpleName}+' + '}"></span>
+
+                        </th:block>
+                    </th:block>
+                    <div class="mt-5">
+                        <th:block th:each="quantite : ${menu.quantite}">
+                            <th:block th:if="${quantite.taille} != null" th:each="comp : ${quantite.taille}">
+                                <span class="mx-1" th:text="@{' + '+${comp.produitAttributes.nom}}"></span>
+                            </th:block>
+                        </th:block>
+                    </div>
+                </td>-->
+            <td class="py-7 px-6 content" style="color: black">
+                <div class="counter flex justify-between items-center">
+                    <a th:href="@{'/produit/'+${burger.burger.class.simpleName}+'/panier/remove/'+${burger.burger.id}}" class="btn"><i  class="fas fa-minus"></i></a>
+                        <input type="text" name="quantite" disabled th:value="${burger.quantite}" class="w-10 mt-4 text-center mx-1" style="background-color: transparent">
+                    <a th:href="@{'/produit/'+${burger.burger.class.simpleName}+'/panier/addition/'+${burger.burger.id}}"  class="btn"><i  class="fas fa-plus"></i></a>
+                </div>
+            </td>
+
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+
+<script type="text/javascript" th:src="@{/js/panier.js}"></script>
+</body>
+</html>

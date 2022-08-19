@@ -1,0 +1,273 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+
+body{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    font-size:170% ;
+    text-transform: initial;
+
+}
+.conteneur{
+    margin-top: 6rem;
+    max-width: 500px;
+    width: 100%;
+    background-color: #fff;
+    padding: 30px 30px 30px;
+    border-radius: 5px;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.15);
+    position: relative;
+}
+.info-complement{
+    margin-top: 5rem;
+    max-width: 300px;
+    width: 100%;
+    padding: 20px;
+    border-radius: 5px;
+
+}
+.conteneur .title{
+    font-size: 18px;
+    font-weight: 500;
+    position: relative;
+    text-transform: initial;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.conteneur .title::before{
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 3px;
+    width: 30px;
+    border-radius: 5px;
+    background: #192A56;
+}
+.content form .user-details{
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 20px 0 0 0;
+}
+.content form .user-details{
+    margin: 0;
+}
+/* step menu */
+.menu_class{
+    display: none;
+}
+.content form .menu_class.active{
+    display: flex;
+}
+/* end 1 */
+.formular{
+    display: none;
+}
+.formular.active{
+    display: block;
+}
+form .user-details .input-box{
+    margin-bottom: 9px;
+    width: 100%;
+}
+#errorBoisson{
+    font-size: 14px;
+    justify-content: center;
+    display: none;
+}
+form .user-details .input-box.error input,
+.input-box.error textarea,
+.select.error {
+    border-color: red;
+}
+form .user-details .input-box.success input,
+.select.success
+.input-box.success textarea{
+    border-color: green;
+}
+small{
+    text-transform: initial;
+    color: red;
+}
+.input-box.success small,
+.select.success small
+{
+   display: none;
+}
+.select small{
+    position: absolute;
+    white-space: nowrap;
+    right: 4rem;
+    margin-top: -25px;
+}
+.type{
+    display: none;
+}
+.type.active{
+    display: block;
+}
+form .input-box span.detail{
+    display: block;
+    font-weight: 500;
+    margin-bottom: 5px;
+    font-size: 13px;
+    color:gray;
+}
+.select2-container .select2-selection--single{
+    height: 42px !important;
+    border: none !important;
+}
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+    color: #444;
+    line-height: 43px !important;
+}
+.select2-container .select2-selection--multiple .select2-selection__rendered{
+    display: flex !important;
+}
+.user-details .input-box input , select , .select , .select2-container ,textarea{
+    height: 45px !important;
+    width: 100% !important;
+    outline: none;
+    font-size: 16px;
+    border-radius: 5px;
+    padding-left: 0px;
+    border: 1px solid #ccc;
+    transition: all 0.3s ease;
+}
+.user-details .input-box input, textarea{
+    padding-left: 15px !important;
+}
+.select2-container,
+.select2-container--default .select2-selection--multiple{
+    border: none !important;
+    padding: 0!important;
+    height: 43px !important;
+
+}
+.user-details .input-box input:focus , textarea:focus , select:focus{
+    border-color: #192A56;
+}
+.prix{
+    background-color: transparent;
+    border: 1px solid #cbd5e1;
+}
+select{
+    cursor: pointer;
+}
+form .gender-details .gender-title{
+    font-size: 20px;
+    font-weight: 500;
+}
+
+form .button{
+    height: 45px;
+    margin: 16px 0 18px 0
+}
+form .button input:hover{
+    transform: scale(0.99);
+    background: #12358F;
+}
+/* step menu */
+
+#counterForTailleboisson{
+    width: 17% !important;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    border-left: 0;
+}
+#tailleboissonName,
+#taillefrittesName{
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+#checkbox,
+#checkbox2{
+    width: 4.5% !important;
+    margin-left: 5px;
+}
+
+input[type=checkbox]:checked {
+    accent-color:green;
+    color: white;
+}
+
+input[type='checkbox']:before {
+    box-shadow: none !important;
+    color: #fff;
+}
+/* end */
+@media(max-width: 584px){
+    .conteneur{
+        max-width: 100%;
+    }
+    form .user-details .input-box{
+        margin-bottom: 15px;
+        width: 100%;
+    }
+    form .category{
+        width: 100%;
+    }
+    .content form .user-details{
+        max-height: 300px;
+        overflow-y: scroll;
+    }
+    .user-details::-webkit-scrollbar{
+        width: 5px;
+    }
+}
+@media(max-width: 459px){
+    .conteneur .content .category{
+        flex-direction: column;
+    }
+}
+
+/*
+!* Mark input boxes that gets an error on validation: *!
+input.invalid {
+    background-color: #ffdddd;
+}
+
+!* Hide all steps by default: *!
+.tab {
+    display: none;
+}
+button {
+    background-color: #04AA6D;
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+
+    cursor: pointer;
+}
+
+button:hover {
+    opacity: 0.8;
+}
+
+#prevBtn {
+    background-color: #bbbbbb;
+}
+
+!* Make circles that indicate the steps of the form: *!
+.step {
+    height: 15px;
+    width: 15px;
+    margin: 0 2px;
+    background-color: #bbbbbb;
+    border: none;
+    border-radius: 50%;
+    display: inline-block;
+    opacity: 0.5;
+}
+.step.active {
+    opacity: 1;
+}
+!* Mark the steps that are finished and valid: *!
+.step.finish {
+    background-color: #04AA6D;
+}*/
+/* menu step */

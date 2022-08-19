@@ -1,14 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Connexion</title>
-    <link rel="stylesheet" th:href="@{/css/style.css}" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
-
 </head>
 <body >
+<div th:replace="inc/menu :: menu"></div>
+
     <div class="flex justify-center items-center h-screen bg-gray-100">
         <form  class="block p-5 bg-white shadow-md w" id="form">
             <div class="text-centaer pb-4">
@@ -31,6 +29,6 @@
     </div>
 
 
-    <script type="text/javascript" th:src="@{/js/connexion.js}"></script>
+    <script type="text/javascript" th:src="@{/js/validator.js}"></script>
 </body>
 </html>

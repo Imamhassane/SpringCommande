@@ -21,17 +21,25 @@ public class Image {
     @Column(nullable = false)
     private String nom;
 
-    @ManyToOne
-    @JoinColumn(name = "menu" , referencedColumnName = "id")
+    @OneToOne(mappedBy = "image")
+    private Burger burger;
+
+    @OneToOne(mappedBy = "image")
     private Menu menu ;
 
-    @OneToOne
-    @JoinColumn(name = "burger" , referencedColumnName = "id")
-    private Burger burger ;
+    @OneToOne(mappedBy = "image")
+    protected Complement complement;
 
-    @ManyToOne
-    @JoinColumn(name = "complement" , referencedColumnName = "id")
-    private Complement complement ;
+    public Image(String nom) {
+        this.nom = nom;
+    }
 
+    @Override
+    public String toString() {
+        return "Image{" +
+                "id=" + id +
+                ", nom='" + nom + '\'' +
+                '}';
+    }
 
 }

@@ -18,20 +18,19 @@ public class Complement {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private  Long id;
+    protected   Long id;
 
     @Column(nullable = false)
-    private String nom;
+    protected String nom;
 
-    @OneToMany
-    @JoinColumn(name = "complement")
-    private List<Image> images = new ArrayList<>();
+    @OneToOne
+    @JoinColumn(name = "image" , referencedColumnName = "id")
+        private Image image ;
 
-    @OneToMany
-    @JoinColumn(name = "complement")
-    private List<QuantityEntity> quantite = new ArrayList<>();
+    @OneToMany(mappedBy = "complement")
+    protected List<QuantityEntity> quantite = new ArrayList<>();
 
     @ManyToOne
     @JoinColumn(name = "taille" , referencedColumnName = "id")
-    private Taille taille;
+    protected Taille taille;
 }

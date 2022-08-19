@@ -28,8 +28,7 @@ public class Commande {
     @JoinColumn(name = "client" , referencedColumnName = "id")
     private Client client;
 
-    @OneToMany
-    @JoinColumn(name = "commande")
+    @OneToMany(mappedBy = "commande")
     private List<QuantityEntity> quantite = new ArrayList<>();
 
     @Embedded

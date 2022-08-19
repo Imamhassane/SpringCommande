@@ -20,7 +20,18 @@ public class Marque {
     @Column(nullable = false)
     private String  nom;
 
-    @OneToMany
-    @JoinColumn(name = "marque")
+    @OneToMany(mappedBy = "marque")
     private List<Boisson> boissons = new ArrayList<>();
+
+    public Marque(String nom){
+        this.nom = nom;
+    }
+
+    @Override
+    public String toString() {
+        return "Marque{" +
+                "id=" + id +
+                ", nom='" + nom + '\'' +
+                '}';
+    }
 }

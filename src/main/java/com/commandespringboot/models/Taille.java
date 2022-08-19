@@ -16,13 +16,29 @@ public class Taille {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private  Long id;
 
-    @Column(nullable = false)
-    private String libelle;
+    @Embedded
+    private ProduitAttributes produitAttributes;
 
     @Column(nullable = false)
-    private int prix;
+    private String type;
 
-    @OneToMany
-    @JoinColumn(name = "taille")
+    @OneToMany(mappedBy = "taille")
     private List<Complement> complements =new ArrayList<>();
+
+    @OneToMany(mappedBy = "taille")
+    private List<QuantityEntity> quantite = new ArrayList<>();
+
+    public Taille(ProduitAttributes produitAttributes , String type){
+        this.produitAttributes = produitAttributes;
+        this.type = type;
+    }
+
+    @Override
+    public String toString() {
+        return "Taille{" +
+                "id=" + id +
+                ", produitAttributes=" + produitAttributes +
+                ", type='" + type + '\'' +
+                '}';
+    }
 }

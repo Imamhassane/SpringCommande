@@ -1,12 +1,10 @@
 package com.commandespringboot;
 
-import com.commandespringboot.repository.ClientRepository;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 
-@SpringBootApplication
-@EnableJpaRepositories(basePackageClasses = ClientRepository.class)
+@SpringBootApplication(exclude = {SecurityAutoConfiguration.class })
 public class   CommandeSpringBootApplication {
     public static void main(String[] args) {
         SpringApplication.run(CommandeSpringBootApplication.class, args);

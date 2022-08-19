@@ -17,17 +17,22 @@ public class Burger {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private  Long id;
 
-    @Column(nullable = false)
-    private String nom;
+    @Embedded
+    private ProduitAttributes produitAttributes;
 
     @Column(nullable = false)
-    private int prix;
+    private String description;
 
-    @OneToOne(mappedBy = "burger")
+    @OneToOne
+    @JoinColumn(name = "image" , referencedColumnName = "id")
     private Image image ;
 
-    @OneToMany
-    @JoinColumn(name = "burger")
+    @OneToMany(mappedBy = "burger")
     private List<QuantityEntity> quantite = new ArrayList<>();
 
+
+    public Burger(ProduitAttributes produitAttributes, String desc) {
+        this.produitAttributes= produitAttributes;
+        this.description = desc;
+    }
 }

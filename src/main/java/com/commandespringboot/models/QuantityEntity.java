@@ -21,7 +21,7 @@ public class QuantityEntity {
 
     @ManyToOne
     @JoinColumn(name = "complement" , referencedColumnName = "id")
-    private Complement complements ;
+    private Complement complement ;
 
     @ManyToOne
     @JoinColumn(name = "burger" , referencedColumnName = "id")
@@ -34,4 +34,21 @@ public class QuantityEntity {
     @ManyToOne
     @JoinColumn(name = "commande" , referencedColumnName = "id")
     private Commande commande ;
+
+    @ManyToOne
+    @JoinColumn(name = "taille" , referencedColumnName = "id")
+    private Taille taille ;
+
+    @Override
+    public String toString() {
+        return "QuantityEntity{" +
+                "id=" + id +
+                ", quantite=" + quantite +
+                ", complement=" + complement +
+                ", burger=" + burger +
+                ", menu=" + menu +
+                ", commande=" + commande +
+                ", taille=" + taille +
+                '}';
+    }
 }

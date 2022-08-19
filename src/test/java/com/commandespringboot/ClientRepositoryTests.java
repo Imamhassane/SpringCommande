@@ -18,7 +18,7 @@ import java.util.List;
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @Rollback(false)
 public class ClientRepositoryTests {
- /*
+
    @Autowired
    private ClientRepository clientRepository;
 
@@ -30,20 +30,20 @@ public class ClientRepositoryTests {
         adresse.setVille("kaolack");
 
         Client client = new Client();
-        client.setNom("client");
-        client.setPrenom("client");
-        client.setUserName("client@gmail.com");
+        client.setNom("admin");
+        client.setPrenom("admin");
+        client.setEmail("admin@gmail.com");
         client.setAdresse(adresse);
         client.setPassword("passer");
         client.setNumero(771249886);
-        client.setRoles("ROLE_USER");
+        client.setRoles("ROLE_ADMIN");
 
-        Client okay = clientRepository.saveAndFlush(client);
+        /*Client okay = clientRepository.save(client);
 
         Assertions.assertThat(okay).isNotNull();
-        Assertions.assertThat(okay.getId()).isGreaterThan(0);
+        Assertions.assertThat(okay.getId()).isGreaterThan(0);*/
     }
-
+ /*
 
     @Test
     public void TestFindAll(){

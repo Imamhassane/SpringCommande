@@ -9,7 +9,6 @@ import java.util.List;
 @Entity
 @DiscriminatorValue("CLIENT")
 @AllArgsConstructor
-@NoArgsConstructor
 @Getter
 @Setter
 public class Client extends User {
@@ -20,8 +19,7 @@ public class Client extends User {
     @Embedded
     private Adresse adresse;
 
-    @OneToMany
-    @JoinColumn(name = "client")
+    @OneToMany(mappedBy = "client")
     private List<Commande> commandes = new ArrayList<>();
 
     @Override
@@ -33,9 +31,12 @@ public class Client extends User {
                 ", id=" + id +
                 ", nom='" + nom + '\'' +
                 ", prenom='" + prenom + '\'' +
-                ", userName='" + userName + '\'' +
+                ", userName='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", roles='" + roles + '\'' +
                 '}';
+    }
+    public Client() {
+        this.roles =  "ROLE_CLIENT";
     }
 }

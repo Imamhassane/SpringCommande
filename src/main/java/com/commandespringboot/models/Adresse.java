@@ -13,6 +13,7 @@ import javax.persistence.Embeddable;
 @Getter
 @Setter
 public class Adresse {
+
     private String ville;
     private String quartier;
 

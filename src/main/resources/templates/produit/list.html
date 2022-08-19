@@ -1,24 +1,151 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
     <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-
+    <style> btn:hover{letter-spacing: normal !important;}</style>
     <link rel="stylesheet" th:href="@{/css/main.css}" />
+    <style>
+        .btn.active{
+            background-color: #27ae60;
+            color: #fff;
+        }
+    </style>
 </head>
-<body class="bg-gray-100">
+<body>
 <div class="nav">
     <div th:replace="inc/menu :: menu" ></div>
 </div>
-<div class="table-content">
+<div class="flex justify-center items-center mb-3">
+    <span class="btn showTable mx-2 active" value="burger">Burger</span>
+    <span class="btn showTable mx-2" value="menu">Menu</span>
+    <span class="btn showTable mx-2" value="comp">Complement</span>
+</div>
+<!--table burger-->
+<div class="table-content2 active" id="burger">
     <table class="w-3/4 table shadow-md  text-sm text-left text-gray-500 dark:text-gray-400">
         <thead class="text-xs text-gray-700 uppercase bg-gray-100">
         <tr class="w-full">
             <th scope="col"></th><th scope="col"></th><th scope="col"></th>
             <th scope="col" class="add flex justify-end">
-                <a href="/produit/add">add</a>
+                <a href="/produit/showForm">add</a>
+            </th>
+        </tr>
+        </thead>
+
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+        <tr>
+            <th scope="col" class="py-8 px-6">Image</th>
+            <th scope="col" class="py-8 px-6">Nom</th>
+            <th scope="col" class="py-8 px-6">Prix</th>
+            <th scope="col" class="py-8 px-6">
+                <span class="sr-only">Edit</span>
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="burger : ${burgers}" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+            <td class="py-7 px-6"><img th:src="@{${'/upload/'+burger.image.id+'/'+burger.image.nom}}" width="50" height="50" class="border-none"></td>
+            <td class="py-7 px-6" th:text="${burger.produitAttributes.nom}"></td>
+            <td class="py-7 px-6" th:text="@{${burger.produitAttributes.prix+' F'}}"></td>
+            <td class="py-7 px-6 ">
+                <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+            </td>
+        </tr>
+
+        </tbody>
+    </table>
+        <!--<table>
+            <tr>
+                <th scope="col" style="border: none"></th>
+                <th scope="col" style="border: none"></th>
+                <th scope="col" style="border: none"></th>
+
+                <th scope="col" style="border: none; text-align:right; padding: 0 0 10px 0">
+                    <span> <a href="/produit/showForm" class="btn" >Plus de produit <i class="fas fa-plus"></i> </a></span>
+                </th>
+
+            </tr>
+            <tr>
+                <th scope="col">Image</th>
+                <th scope="col" >Nom</th>
+                <th scope="col" >Prix</th>
+
+                <th scope="col" >
+                    <span >Edit</span>
+                </th>
+            </tr>
+            <tr th:each="burger : ${burgers}">
+                <td class="px-6"><img th:src="@{${'/upload/'+burger.id+'/'+burger.image.nom}}" width="50" height="50" class="border-none mx-auto"></td>
+                <td th:text="${burger.produitAttributes.nom}"></td>
+                <td th:text="@{${burger.produitAttributes.prix+' F'}}"></td>
+                <td>
+                    <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                </td>
+            </tr>
+        </table>-->
+</div>
+<!--table menu-->
+<div class="table-content2" id="menu" >
+    <table class="w-3/4 table shadow-md  text-sm text-left text-gray-500 dark:text-gray-400">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-100">
+        <tr class="w-full">
+            <th scope="col"></th><th scope="col"></th><th scope="col"></th><th scope="col"></th>
+            <th scope="col" class="add flex justify-end">
+                <a href="/produit/showForm">add</a>
+            </th>
+        </tr>
+        </thead>
+
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+        <tr>
+            <th scope="col" class="py-8 px-6">Image</th>
+            <th scope="col" class="py-8 px-6">Nom</th>
+            <th scope="col" class="py-8 px-6">Prix</th>
+            <th scope="col" class="py-8 px-6 text-center">Composants</th>
+            <th scope="col" class="py-8 px-6">
+                <span class="sr-only">Edit</span>
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="menu : ${menus}" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+            <td class="py-7 px-6"><img th:src="@{${'/upload/'+menu.image.id+'/'+menu.image.nom}}" width="50" height="50" class="border-none"></td>
+            <td class="py-7 px-6" th:text="${menu.produitAttributes.nom}"></td>
+            <td class="py-7 px-6" th:text="@{${menu.produitAttributes.prix+' F'}}"></td>
+            <td class="py-7 px-6 text-center">
+                <th:block th:each="quantite : ${menu.quantite}">
+                    <th:block th:each="burger : ${quantite.burger}">
+                        <span class="mx-1" th:text="@{${burger.produitAttributes.nom}+' '+${burger.class.simpleName}+' + '}"></span>
+
+                    </th:block>
+                </th:block>
+                <div class="mt-5">
+               <th:block th:each="quantite : ${menu.quantite}">
+                    <th:block th:if="${quantite.taille} != null" th:each="comp : ${quantite.taille}">
+                        <span class="mx-1" th:text="@{' + '+${comp.produitAttributes.nom}}"></span>
+                    </th:block>
+                </th:block>
+                </div>
+            </td>
+            <td class="py-7 px-6 ">
+                <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+            </td>
+        </tr>
+
+        </tbody>
+    </table>
+</div>
+<!--table complement-->
+<div class="table-content2" id="complement">
+    <table class="w-3/4 table shadow-md  text-sm text-left text-gray-500 dark:text-gray-400">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-100">
+        <tr class="w-full">
+            <th scope="col"></th><th scope="col"></th><th scope="col"></th>
+            <th scope="col" class="add flex justify-end">
+                <a href="/produit/showForm">add</a>
             </th>
         </tr>
         </thead>
@@ -35,11 +162,14 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="burger : ${burgers}" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-
-            <td class="py-7 px-6" th:text="${burger.prix}"></td>
-            <td class="py-7 px-6" th:text="${burger.nom}"></td>
-            <td class="py-7 px-6 text-right">
+        <tr th:each="complement : ${complements}" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+            <td class="py-7 px-6"><img th:src="@{${'/upload/'+complement.image.id+'/'+complement.image.nom}}" width="50" height="50" class="border-none"></td>
+            <td class="py-7 px-6">
+                <span th:if="${complement.nom == 'Boisson'}" th:text="@{${complement.taille.produitAttributes.nom}+' '+${complement.marque.nom}}"></span>
+                <span th:if="${complement.nom == 'Fritte'}" th:text="${complement.taille.produitAttributes.nom}"></span>
+            </td>
+            <!--<td class="py-7 px-6" th:text="@{${complement.produitAttributes.prix+' F'}}"></td>-->
+            <td class="py-7 px-6 ">
                 <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
             </td>
         </tr>
@@ -49,6 +179,8 @@
 </div>
 
 
+
+<script type="text/javascript" th:src="@{/js/table.js}"></script>
 <script type="text/javascript" th:src="@{/js/catalogue.js}"></script>
 
 </body>

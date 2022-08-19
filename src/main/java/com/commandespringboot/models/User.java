@@ -10,10 +10,10 @@ import java.io.Serializable;
 @DiscriminatorColumn(name="user_type")
 @DiscriminatorValue("ADMIN")
 @AllArgsConstructor
-@NoArgsConstructor
 @Getter
 @Setter
 public class User implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected Long id ;
@@ -25,7 +25,7 @@ public class User implements Serializable {
     protected  String prenom;
 
     @Column(nullable = false , unique = true)
-    protected  String userName;
+    protected  String email;
 
     @Column(nullable = false)
     protected String password;
@@ -33,4 +33,7 @@ public class User implements Serializable {
     @Column(nullable = false)
     protected String roles;
 
+    public User() {
+        this.roles =  "ROLE_ADMIN";
+    }
 }

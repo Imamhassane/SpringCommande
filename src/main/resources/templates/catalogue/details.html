@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catalogue</title>
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+    <style>
+        .w-screen img{
+            width: 100px !important;
+            max-width: 100px !important;
+            height: 100px!important;
+        }
+        .w-screen span{
+            white-space: nowrap;
+            display: flex;
+            justify-content: center;
+        }
+        .burgerImage img{
+            width: 250px !important;
+            max-width: 1000px !important;
+            height: 182px !important;
+        }
+        input[type=checkbox]:checked {
+            accent-color:green;
+            color: white;
+        }
+
+        input[type='checkbox']:before {
+            box-shadow: none !important;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+
+<!-- header section starts      -->
+<div th:replace="inc/menu :: menu"></div>
+<!-- header section ends-->
+
+<!-- home section starts  -->
+
+<section id="home" class="home bg-white border-b border-slate-300" >
+    <div class="content absolute flex items-center justify-between top-28 left-8">
+        <a th:href="@{/catalogue}" class="btn rounded-full normal-case border-slate-300 " style=""><i class="fas fa-arrow-left mr-2"></i></a>
+    </div>
+    <div class="home-slider">
+            <div class="swiper-slide slide" style="display: block">
+                <div class="image mt-10">
+                    <img th:src="@{${'/upload/'+produit.image.id+'/'+produit.image.nom}}" alt=""/>
+                </div>
+                <div class="content grid justify-center" id="content">
+                    <!--<span id="span" th:text="@{${'notre special '+produit.class.simpleName}}"></span>-->
+                    <h3 class="text-center" th:text="@{${produit.class.simpleName}+' '+${produit.produitAttributes.nom}}"></h3>
+                    <div class="flex justify-center overflow-x-auto w-full pb-4 mt-5">
+                        <th:block th:if="${not #lists.isEmpty(burgerList)}" th:each="hamburg : ${burgerList}">
+                            <div class="burgerImage px-10">
+                                <img th:src="@{${'/upload/'+hamburg.image.id+'/'+hamburg.image.nom}}" alt="" />
+                                <div class="flex justify-between items-center border border-slate-300 px-4 ">
+                                    <span th:text="${hamburg.produitAttributes.nom}"></span>
+                                    <span th:text="@{${hamburg.produitAttributes.prix+ ' F'}}"></span>
+                                </div>
+                            </div>
+                        </th:block>
+                        <th:block th:if="${not #lists.isEmpty(FrittesSimpleMenu)}" th:each="fritte : ${FrittesSimpleMenu}">
+                            <div class="burgerImage px-10">
+                                <img th:src="@{${'/upload/'+fritte.image.id+'/'+fritte.image.nom}}" alt="" />
+                                <div class="flex justify-between items-center border border-slate-300 px-4 ">
+                                    <span th:text="${fritte.taille.produitAttributes.nom}"></span>
+                                    <span th:text="@{${fritte.taille.produitAttributes.prix+ ' F'}}"></span>
+                                </div>
+                            </div>
+                        </th:block>
+                        <th:block th:if="${not #lists.isEmpty(FrittesDoubleMenu)}" th:each="fritte : ${FrittesDoubleMenu}">
+                            <div class="burgerImage px-10">
+                                <img th:src="@{${'/upload/'+fritte.image.id+'/'+fritte.image.nom}}" alt="" />
+                                <div class="flex justify-between items-center border border-slate-300 px-4 ">
+                                    <span th:text="${fritte.taille.produitAttributes.nom}"></span>
+                                    <span th:text="@{${fritte.taille.produitAttributes.prix+ ' F'}}"></span>
+                                </div>
+                            </div>
+                        </th:block>
+                        <th:block th:if="${not #lists.isEmpty(FrittesMixteMenu)}" th:each="fritte : ${FrittesMixteMenu}">
+
+                            <div class="burgerImage px-10">
+                                <img th:src="@{${'/upload/'+fritte.image.id+'/'+fritte.image.nom}}" alt="" />
+                                <div class="flex justify-between items-center border border-slate-300 px-4 ">
+                                    <span th:text="${fritte.taille.produitAttributes.nom}"></span>
+                                    <span th:text="@{${fritte.taille.produitAttributes.prix+ ' F'}}"></span>
+                                </div>
+                            </div>
+                        </th:block>
+                    </div>
+
+                    <p  th:if="${produit.class.simpleName == 'Burger' }" th:text="${produit.description}"></p>
+
+                    <div class="flex flex-col justify-center items-center">
+                        <div th:if="${produit.class.simpleName == 'Menu' }" class="flex font-semibold justify-between detailBoissnMenutitlle mt-6">
+                            <span>Compléments</span>
+                            <span>quantités</span>
+                            <!--<span>Unité</span>-->
+                        </div>
+                        <th:bockk th:if="${produit.class.simpleName == 'Menu' }" th:each="prod : ${produit.quantite}">
+                            <th:block th:if="${prod.taille != null }">
+                                <div class="flex justify-between bg-slate-50 detailBoissnMenu mb-4">
+                                    <span th:text="${prod.taille.produitAttributes.nom}"></span>
+                                    <span th:if="${prod.quantite != 0 }"th:text="@{' maximum('+${prod.quantite}+') minimum('+${prod.quantite}+')'}"></span>
+                                    <!--<span th:text="@{${prod.taille.produitAttributes.prix}+' F'}"></span>-->
+                                </div>
+                            </th:block>
+                        </th:bockk>
+                    </div>
+
+                    <div class="flex overflow-x-auto w-full pb-4 mb-5 mt-5">
+                        <th:block th:if="${not #lists.isEmpty(cannetteMenu)}" th:each="boisson : ${cannetteMenu}">
+                            <div class="w-screen px-10 flex flex-col justify-between items-center">
+                                <img th:src="@{${'/upload/'+boisson.image.id+'/'+boisson.image.nom}}" alt="" />
+                                <span class="py-2" th:text="${boisson.marque.nom}"></span>
+                                <div class="flex justify-center">
+                                    <div class="flex justify-between items-center w-40 mr-2 border border-slate-300 px-4">
+                                        <a href="#" class="fas fa-minus "></a>
+                                        <span>1</span>
+                                        <a href="#" class="fas fa-plus"></a>
+                                    </div>
+                                    <input type="checkbox" class="w-8" th:value="${boisson.id}">
+                                </div>
+                            </div>
+                        </th:block>
+
+                        <th:block th:if="${not #lists.isEmpty(bouteilleMenu)}" th:each="boisson : ${bouteilleMenu}" >
+                            <div class="w-screen px-10 flex flex-col justify-between items-center">
+                                <img th:src="@{${'/upload/'+boisson.image.id+'/'+boisson.image.nom}}" alt="" />
+                                <span class="py-2" th:text="${boisson.marque.nom}"></span>
+                                <div class="flex justify-center">
+                                    <div class="flex justify-between items-center w-40 mr-2 border border-slate-300 px-4">
+                                        <a href="#" class="fas fa-minus "></a>
+                                        <span>1</span>
+                                        <a href="#" class="fas fa-plus"></a>
+                                    </div>
+                                    <input type="checkbox" class="w-8" th:value="${boisson.id}">
+                                </div>
+                            </div>
+                        </th:block>
+
+                        <th:block th:if="${not #lists.isEmpty(bouteille1LMenu)}" th:each="boisson : ${bouteille1LMenu}" >
+                            <div class="w-screen px-10 flex flex-col justify-between items-center">
+                                <img th:src="@{${'/upload/'+boisson.image.id+'/'+boisson.image.nom}}" alt="" />
+                                <span class="py-2" th:text="${boisson.marque.nom}"></span>
+                                <div class="flex justify-center">
+                                    <div class="flex justify-between items-center w-40 mr-2 border border-slate-300 px-4">
+                                        <a href="#" class="fas fa-minus "></a>
+                                        <span>1</span>
+                                        <a href="#" class="fas fa-plus"></a>
+                                    </div>
+                                    <input type="checkbox" class="w-8" th:value="${boisson.id}">
+                                </div>
+                            </div>
+                        </th:block>
+                    </div>
+
+                    <h3 id="prixDetail" class="font-semibold" th:text="@{${produit.produitAttributes.prix + 'F CFA'}}"></h3>
+                    <a href="#" class="btn mx-auto border normal-case border-slate-300 w-full text-center" id="btn-add-to-cart">Ajouter au panier</a>
+                </div>
+            </div>
+    </div>
+</section>
+<!-- home section ends -->
+
+<!-- menu section starts  -->
+
+<section class="menu mt-10" id="menu" >
+
+    <div class="box-container">
+        <th:block  th:each="produit: ${produitList}">
+            <div class="box shadow-lg">
+                <div class="image">
+                    <span href="#" class="prix" th:text="@{${produit.produitAttributes.prix+' F'}}"></span>
+                    <img th:src="@{${'/upload/'+produit.image.id+'/'+produit.image.nom}}" alt=""/>
+
+                    <h3 th:text="@{${produit.produitAttributes.nom}+' '+${produit.class.simpleName}}" class="price"></h3>
+                </div>
+                <div class="content">
+                    <div class="flex justify-between w-full">
+                        <a  th:href="@{'/produit/'+${produit.class.simpleName}+'/panier/add/'+${produit.id}}" class="btn-cart"><i class="fas fa-cart-plus"></i></a>
+                        <a  th:href="@{'/produit/'+${produit.class.simpleName}+'/details/'+${produit.id}}" class="btn-cart"> Détails </a>
+                    </div>
+
+                </div>
+            </div>
+        </th:block>
+    </div>
+</section>
+
+<!-- menu section ends -->
+<section class="footer">
+    <div class="credit"> copyright @ 2021 by <span>Imam</span> </div>
+</section>
+<script type="text/javascript" th:src="@{/js/panier.js}"></script>
+
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
+<!-- custom js file link  -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+<script src="https://cdn.rawgit.com/michalsnik/aos/2.1.1/dist/aos.js"></script>
+
+<script> AOS.init({duration: 800,});</script></body>
+</html>

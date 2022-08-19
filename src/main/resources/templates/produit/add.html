@@ -5,154 +5,255 @@
     <title>Title</title>
     <link rel="stylesheet" th:href="@{/css/main.css}" />
     <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" th:href="@{/css/add.css}">
+    <!-- jquery -->
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
-        body{
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 10px;
-            --tw-bg-opacity: 1;
-            background-color: rgba(243,244,246,var(--tw-bg-opacity));
-        }
-        .container{
-            margin-top: 5rem;
-            max-width: 700px;
-            width: 100%;
-            background-color: #fff;
-            padding: 25px 30px;
-            border-radius: 5px;
-            box-shadow: 0 5px 10px rgba(0,0,0,0.15);
-            font-size:170% ;
-        }
-        .container .title{
-            font-size: 25px;
-            font-weight: 500;
-            position: relative;
-        }
-        .container .title::before{
-            content: "";
-            position: absolute;
-            left: 0;
-            bottom: 0;
-            height: 3px;
-            width: 30px;
-            border-radius: 5px;
-            background: #192A56;
-        }
-        .content form .user-details{
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            margin: 20px 0 12px 0;
-        }
-        form .user-details .input-box{
-            margin-bottom: 15px;
-            width: 100%;
-        }
-        form .input-box span.details{
-            display: block;
-            font-weight: 500;
-            margin-bottom: 5px;
-        }
-        .user-details .input-box input{
-            height: 45px;
-            width: 100%;
-            outline: none;
-            font-size: 16px;
-            border-radius: 5px;
-            padding-left: 15px;
-            border: 1px solid #ccc;
-            transition: all 0.3s ease;
-        }
-        .user-details .input-box input:focus{
-            border-color: #192A56;
-        }
-        form .gender-details .gender-title{
-            font-size: 20px;
-            font-weight: 500;
-        }
+    <!-- select2 -->
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
-        form .button{
-            height: 45px;
-            margin: 35px 0
-        }
-        form .button input{
-            height: 100%;
-            width: 100%;
-            border-radius: 5px;
-            border: none;
-            color: #fff;
-            font-size: 18px;
-            font-weight: 500;
-            letter-spacing: 1px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            background-color: #192A56;
-        }
-        form .button input:hover{
-            transform: scale(0.99);
-            background: #12358F;
-        }
-        @media(max-width: 584px){
-            .container{
-                max-width: 100%;
-            }
-            form .user-details .input-box{
-                margin-bottom: 15px;
-                width: 100%;
-            }
-            form .category{
-                width: 100%;
-            }
-            .content form .user-details{
-                max-height: 300px;
-                overflow-y: scroll;
-            }
-            .user-details::-webkit-scrollbar{
-                width: 5px;
-            }
-        }
-        @media(max-width: 459px){
-            .container .content .category{
-                flex-direction: column;
-            }
-        }
-    </style>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
 </head>
-<body class="bg-gray-100">
-<div class="nav">
-    <div th:replace="inc/menu :: menu" ></div>
-</div>
-<div class="container">
-    <div class="title">Registration</div>
-    <div class="content">
-        <form th:action="@{/produit/save}" method="POST" th:object="${burger}" enctype="multipart/form-data">
-            <div class="user-details">
-                <div class="input-box">
-                    <span class="details">Nom</span>
-                    <input type="text" name="nom">
-                </div>
+<body>
 
+<div class="nav"><div th:replace="inc/menu :: menu" ></div></div>
+<div class="conteneur">
+    <div class="title">
+        Ajouter un produit
+        <div class="flex justify-center items-center mt-3">
+            <ul class="flex justify-between cont">
+                <li class="filtre addfood active" id="burgerFormbutton"  value="burgerFormbutton">Burger</li>
+                <li class="filtre addfood" id="menuFormbutton" value="menuFormbutton">Menu</li>
+                <li class="filtre addfood" id="complementFormbutton" value="complementFormbutton">Complement</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ajputer un burger -->
+        <div class="content formular active " id="burgerForm">
+        <form th:action="@{/produit/save/burger}" method="POST" id="formBurger" enctype="multipart/form-data">
+            <div class="user-details" th:object="${burger}">
+                <th:block th:object="${attributes}">
+                    <div class="input-box mt-5" >
+                        <div class="flex justify-between">
+                            <span class="detail">Nom</span>
+                            <small></small>
+                        </div>
+                        <input type="text" name="nom" id="Le nom">
+                    </div>
+                    <div class="input-box">
+                        <div class="flex justify-between">
+                            <span class="detail">Prix</span>
+                            <small></small>
+                        </div>
+                        <input type="number" name="prix" id="Le prix">
+                    </div>
+                </th:block>
                 <div class="input-box">
-                    <span class="details">Prix</span>
-                    <input type="number" name="prix" >
+                    <div class="flex justify-between">
+                        <span class="detail">Desciption</span>
+                        <small></small>
+                    </div>
+                    <textarea name="description" id="La description" class="pt-4" style="height: 130px!important;"></textarea>
                 </div>
-                <div class="input-box">
-                    <span class="details">Image</span>
-                    <input type="file" name="image" style="border: none ; padding: 0">
+                <div class="input-box" th:object="${image}">
+                    <div class="flex justify-between">
+                        <span class="detail">Image</span>
+                        <small></small>
+                    </div>
+                    <label for="L'image" type="button" class=" cursor-pointer inline-flex justify-between items-center focus:outline-none border py-2 px-4 rounded-lg shadow-sm text-left text-gray-600 bg-white hover:bg-gray-100 font-medium">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="inline-flex flex-shrink-0 w-6 h-6 -mt-1 mr-1" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="0" y="0" width="24" height="24" stroke="none"></rect>
+                            <path d="M5 7h1a2 2 0 0 0 2 -2a1 1 0 0 1 1 -1h6a1 1 0 0 1 1 1a2 2 0 0 0 2 2h1a2 2 0 0 1 2 2v9a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-9a2 2 0 0 1 2 -2" />
+                            <circle cx="12" cy="13" r="3" />
+                        </svg>
+                        Ajouter une image
+                    </label>
+                    <input name="image" id="L'image" class="hidden" type="file"/>
                 </div>
             </div>
-            <div class="button">
-                <input type="submit" value="Register">
+            <div>
+                <input type="submit" value="Enregistrer" class="btn w-full p-3 border border-slate-300">
             </div>
         </form>
     </div>
+    <!-- end ajputer un burger -->
+
+    <!-- Ajouter un menu -->
+        <div class="content formular" id="menuForm">
+        <form th:action="@{/produit/save/menu}" method="POST" enctype="multipart/form-data">
+            <div class="user-details menu_class active ">
+                <div class="input-box mt-3">
+                    <div class="flex justify-between">
+                        <span class="detail">Nom</span>
+                        <small></small>
+                    </div>
+                    <input type="text" name="nom" id="nom">
+                </div>
+                <div class="input-box">
+                    <div class="flex justify-between">
+                        <span class="detail">Burger</span>
+                    </div>
+                    <div class="select">
+                        <select class="js-example-basic-multiple" name="burgers[]" multiple id="Le burger" >
+                            <option th:each="burger :${burgers}" th:value="${burger.id}" th:text="${burger.produitAttributes.nom}"></option>
+                        </select>
+                        <small></small>
+                    </div>
+                </div>
+                <div class="input-box">
+                    <div class="flex justify-between">
+                        <span class="detail">Description</span>
+                        <small></small>
+                    </div>
+                    <textarea name="description" id="La description du menu" class="pt-4" style="height: 130px!important;"></textarea>
+                </div>
+
+                <div class="input-box" th:object="${image}">
+                    <div class="flex justify-between">
+                        <span class="detail">Image</span>
+                        <small></small>
+                    </div>
+                    <label for="Image" type="button" class=" cursor-pointer inline-flex justify-between items-center focus:outline-none border py-2 px-4 rounded-lg shadow-sm text-left text-gray-600 bg-white hover:bg-gray-100 font-medium">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="inline-flex flex-shrink-0 w-6 h-6 -mt-1 mr-1" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="0" y="0" width="24" height="24" stroke="none"></rect>
+                            <path d="M5 7h1a2 2 0 0 0 2 -2a1 1 0 0 1 1 -1h6a1 1 0 0 1 1 1a2 2 0 0 0 2 2h1a2 2 0 0 1 2 2v9a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-9a2 2 0 0 1 2 -2" />
+                            <circle cx="12" cy="13" r="3" />
+                        </svg>
+                        Ajouter une image
+                    </label>
+                    <input name="image" id="Image" class="hidden" type="file"/>
+                </div>
+            </div>
+            <div class="user-details menu_class">
+                <div class="input-box mt-5">
+                    <small id="errorBoisson">cocher au moins une taille</small>
+                    <div class="flex justify-between">
+                        <span class="detail">Taille de boisson</span>
+                        <span class="detail pr-12">Quantité</span>
+                    </div>
+                    <th:block th:each="tailleboisson , index : ${taillesBoisson}">
+                        <div class="flex mb-7">
+                            <input type="text" id="tailleboissonName" disabled th:value="${tailleboisson.produitAttributes.nom}">
+                            <input type="number" id="counterForTailleboisson" th:name="@{'nombreBoisson'+${index.index}}" value="1">
+                            <input type="checkbox" class="checkboxBoisson" id="checkbox" th:name="@{'tailleboissonChecks'+${index.index}}" th:value="${tailleboisson.id}">
+                        </div>
+                    </th:block>
+                </div>
+            </div>
+            <div class="user-details menu_class" >
+                <div class="input-box mt-5">
+                    <span class="detail">Taille de fritte</span>
+                    <th:block th:each="taillefritte : ${taillesFrittes}">
+                        <div class="flex mb-7">
+                            <input type="text" id="taillefrittesName" disabled th:value="${taillefritte.produitAttributes.nom}">
+                            <input type="checkbox" id="checkbox2" name="taillefrittesChecks[]" th:value="${taillefritte.id}">
+                        </div>
+                    </th:block>
+                </div>
+            </div>
+            <div class="user-details button" >
+                <div class="flex justify-between items-center">
+                    <div>
+                        <a class="btn precedent hidden">precedent</a>
+                    </div>
+                    <div id="suivant-class" class="flex">
+                        <input type="submit" value="Enregistrer" id="valider" class="btn"style="visibility: hidden">
+                        <a class="btn suivant" id="suivant">suivant</a>
+                    </div>
+                </div>
+            </div>
+
+        </form>
+    </div>
+    <!-- end Ajouter un menu -->
+
+    <!-- Ajouter un complement -->
+        <div class="content formular" id="complementForm">
+        <form th:action="@{/produit/save/complement}" method="POST" id="formComp" enctype="multipart/form-data">
+            <div class="user-details" th:object="${complement}">
+                <div class="input-box mt-6">
+                    <span class="detail">Type de complément</span>
+                    <select name="type" id="typeComp">
+                        <option value="boisson">Boisson</option>
+                        <option value="fritte">Frittes</option>
+                    </select>
+                </div>
+
+                <div class="input-box type" id="frittesdata">
+                    <span class="detail">Taille</span>
+                    <div class="select">
+                        <select class="js-example-basic-multiple" name="tailleFritteCheck" id="La taille du fritte">
+                            <option value="">choisir ...</option>
+                            <option th:each="taillefritte :${taillesFrittes}" th:value="${taillefritte.id}" th:text="${taillefritte.produitAttributes.nom}"></option>
+                        </select>
+                        <small></small>
+                    </div>
+                </div>
+
+                <div class="input-box type active" id="boissondata">
+
+                    <span class="detail">Taille</span>
+                    <div class="select">
+                        <select class="js-example-basic-multiple" name="tailleBoissonCheck" id="La taille du boisson" >
+                            <option value="">choisir ...</option>
+                            <option th:each="tailleboisson : ${taillesBoisson}" th:value="${tailleboisson.id}" th:text="${tailleboisson.produitAttributes.nom}"></option>
+                        </select>
+                        <small></small>
+                    </div>
+
+                    <span class="detail mt-3">Marque</span>
+                    <div class="select">
+                        <select class="js-example-basic-multiple"  name="marque" id="La marque" >
+                            <option value="">choisir ...</option>
+                            <option th:each="marque : ${marques}" th:value="${marque.id}" th:text="${marque.nom}"></option>
+                        </select>
+                        <small></small>
+                    </div>
+
+                    <div class="flex justify-between mt-3">
+                        <span class="detail">Quantité</span>
+                        <small></small>
+                    </div>
+                    <input type="number" name="quantite" id="La quantite">
+                </div>
+
+                <div class="input-box">
+                    <div class="flex justify-between">
+                        <span class="detail">Image</span>
+                        <small></small>
+                    </div>
+                    <label for="l'image du complement" type="button" class=" cursor-pointer inline-flex justify-between items-center focus:outline-none border py-2 px-4 rounded-lg shadow-sm text-left text-gray-600 bg-white hover:bg-gray-100 font-medium">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="inline-flex flex-shrink-0 w-6 h-6 -mt-1 mr-1" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="0" y="0" width="24" height="24" stroke="none"></rect>
+                            <path d="M5 7h1a2 2 0 0 0 2 -2a1 1 0 0 1 1 -1h6a1 1 0 0 1 1 1a2 2 0 0 0 2 2h1a2 2 0 0 1 2 2v9a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-9a2 2 0 0 1 2 -2" />
+                            <circle cx="12" cy="13" r="3" />
+                        </svg>
+                        Ajouter une image
+                    </label>
+                    <input name="image" id="l'image du complement"  class="hidden" type="file"/>
+                </div>
+            </div>
+            <div>
+                <input type="submit" value="Enregistrer" class="btn w-full p-3 border border-slate-300">
+            </div>
+        </form>
+    </div>
+    <!-- end Ajouter un complement -->
+
 </div>
 
 
+<script type="text/javascript" th:src="@{/js/add.js}"></script>
+<script type="text/javascript" th:src="@{/js/validator.js}"></script>
+
+<script>
+    $(document).ready(function($){
+        $('.js-example-basic-multiple').select2();
+    });
+</script>
 <script type="text/javascript" th:src="@{/js/catalogue.js}"></script>
 
 </body>

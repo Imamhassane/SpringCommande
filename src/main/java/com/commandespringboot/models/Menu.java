@@ -16,17 +16,27 @@ public class Menu {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private  Long id;
 
-    @Column(nullable = false)
-    private String nom;
+    @Embedded
+    private ProduitAttributes produitAttributes;
 
     @Column(nullable = false)
-    private int prix;
+    private String description;
 
-    @OneToMany
-    @JoinColumn(name = "menu")
-    private List<Image> images = new ArrayList<>();
+    @OneToOne
+    @JoinColumn(name = "image" , referencedColumnName = "id")
+    private Image image ;
 
-    @OneToMany
-    @JoinColumn(name = "menu")
+    @OneToMany(mappedBy = "menu")
     private List<QuantityEntity> quantite = new ArrayList<>();
+
+    @Override
+    public String toString() {
+        return "Menu{" +
+                "id=" + id +
+                ", produitAttributes=" + produitAttributes +
+                ", description='" + description + '\'' +
+                ", image=" + image +
+                ", quantite=" + quantite +
+                '}';
+    }
 }

@@ -15,11 +15,8 @@ import java.util.List;
 @Setter
 public class Boisson  extends Complement{
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
 
-    @Column(nullable = false)
+    @Column
     private int stock;
 
     @ManyToOne
